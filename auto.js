@@ -10,7 +10,7 @@ const botName = 'Петя'
 const id_chat = '-1001485632033'
 const adress = 'http://192.168.1.'
 
-const morning = undefined
+let morning = undefined
 const weatherS = new Weather(`${adress}91`, t => test_light(t))
 const rollets = []
 const switchers = []
@@ -30,7 +30,8 @@ function test_light(t) {
     function fun(params) {
         console.log(params?'close':'open')
         for (let i = 1; i < 4; i++) rollets[i].test(params?'down':'up')
-        [0, 1, 3].forEach(i => switchers[i].pir_prot(params?'0':'1'))
+        var tt = [0, 1, 3]
+        tt.forEach(i => switchers[i].pir_prot(params?'0':'1'))
         morning = params
     }
     if (morning == undefined) {
@@ -153,8 +154,8 @@ for (let i = 0; i < rollets.length; i++) {
     })
 }
 
-// start_fn()
+start_fn()
 
 bot.launch()
 
-// bot.telegram.sendMessage(id_chat, 'bot started')
+bot.telegram.sendMessage(id_chat, 'bot started')
